@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CAP Lab · IIT Bombay</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+  /* ─── TOKENS ─── */
+  :root {
+    --teal:   #1D9E75;
+    --teal-lt:#E1F5EE;
+    --teal-dk:#0F6E56;
+    --slate:  #2C3E50;
+    --slate-lt:#ECF0F1;
+    --amber:  #EF9F27;
+    --text:   #1a1a1a;
+    --muted:  #6b7280;
+    --border: #e5e7eb;
+    --bg:     #ffffff;
+    --bg2:    #f9fafb;
+    --radius: 10px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    color: var(--teal-dk);
+    text-decoration: none;
+    max-width: 300px;
+    line-height: 1.2;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .nav-logo img { height: 40px; width: auto; }
+  .nav-links { display: flex; gap: 1.8rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--muted);
+    transition: color 0.2s;
+    letter-spacing: 0.02em;
+  }
+  .nav-links a:hover { color: var(--teal-dk); }
+  .nav-toggle { display: none; background: none; border: none; cursor: pointer; font-size: 1.4rem; color: var(--slate); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 88vh;
+    display: flex; align-items: center;
+    background: linear-gradient(135deg, #04342C 0%, #0F6E56 55%, #1D9E75 100%);
+    padding: 6rem 2rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  /* EDIT: To use a background photo instead of the gradient:
+     1. Save your photo as hero-bg.jpg in the same folder as index.html
+     2. Replace the background line above with:
+        background: url('hero-bg.jpg') center center / cover no-repeat;
+     3. Change the .hero::before background to:  rgba(4, 52, 44, 0.72)
+        (increase 0.72 toward 0.90 for darker, decrease toward 0.45 for lighter) */
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+  }
+  .hero-inner { max-width: 1100px; margin: 0 auto; position: relative; }
+  .hero-eyebrow {
+    display: inline-block;
+    background: rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.85);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.9rem;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    color: #ffffff;
+    line-height: 1.1;
+    max-width: 680px;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 em { font-style: italic; color: #9FE1CB; }
+  .hero p {
+    color: rgba(255,255,255,0.75);
+    font-size: 1.1rem;
+    max-width: 560px;
+    margin-bottom: 2.5rem;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: #ffffff;
+    color: var(--teal-dk);
+    padding: 0.75rem 1.8rem;
+    border-radius: 100px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: transform 0.15s, box-shadow 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+  .btn-outline {
+    border: 1.5px solid rgba(255,255,255,0.4);
+    color: #ffffff;
+    padding: 0.75rem 1.8rem;
+    border-radius: 100px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: background 0.15s;
+  }
+  .btn-outline:hover { background: rgba(255,255,255,0.1); }
+  .hero-stats {
+    display: flex; gap: 3rem;
+    margin-top: 5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    flex-wrap: wrap;
+  }
+  .hero-stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.2rem;
+    color: #fff;
+    display: block;
+    line-height: 1;
+  }
+  .hero-stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.6); margin-top: 4px; }
+
+  /* ─── SECTION WRAPPER ─── */
+  section { padding: 5rem 2rem; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    color: var(--slate);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+  .section-subtitle { color: var(--muted); max-width: 580px; margin-bottom: 3rem; }
+
+  /* ─── ABOUT ─── */
+  #about { background: var(--bg2); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .about-visual {
+    background: var(--teal-lt);
+    border-radius: 16px;
+    aspect-ratio: 4/3;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .about-visual img { width: 100%; height: 100%; object-fit: cover; border-radius: 16px; }
+  .molecule-svg { width: 70%; opacity: 0.55; }
+  .about-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--teal-lt);
+    color: var(--teal-dk);
+    font-size: 0.82rem; font-weight: 600;
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    margin: 0.25rem;
+  }
+
+  /* ─── PI HIGHLIGHT STRIP ─── */
+  .pi-highlight {
+    background: linear-gradient(135deg, #04342C 0%, #0F6E56 100%);
+    border-radius: 16px;
+    padding: 2.5rem;
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 2rem;
+    align-items: center;
+    margin-bottom: 3rem;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+  .pi-highlight:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(4,52,44,0.25); }
+  .pi-photo-circle {
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    border: 3px solid rgba(255,255,255,0.25);
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,0.1);
+    font-family: 'DM Serif Display', serif;
+    font-size: 3rem; color: #9FE1CB;
+    flex-shrink: 0;
+  }
+  .pi-photo-circle img { width: 100%; height: 100%; object-fit: cover; }
+  .pi-hl-role { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 0.35rem; }
+  .pi-hl-name { font-family: 'DM Serif Display', serif; font-size: 1.9rem; color: #fff; line-height: 1.1; margin-bottom: 0.3rem; }
+  .pi-hl-title { color: #9FE1CB; font-size: 0.88rem; font-weight: 600; margin-bottom: 0.8rem; }
+  .pi-hl-bio { color: rgba(255,255,255,0.72); font-size: 0.88rem; line-height: 1.65; margin-bottom: 1.2rem; }
+  .pi-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+  .pi-chip {
+    background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+    color: #fff; font-size: 0.78rem; font-weight: 500;
+    padding: 0.3rem 0.8rem; border-radius: 100px;
+    text-decoration: none; transition: background 0.15s;
+  }
+  .pi-chip:hover { background: rgba(255,255,255,0.22); }
+  .pi-hl-hint { font-size: 0.8rem; color: #9FE1CB; font-weight: 600; }
+
+  /* ─── RESEARCH AREAS ─── */
+  .research-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1.5rem; }
+  .research-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    background: var(--bg);
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .research-card:hover { box-shadow: 0 12px 32px rgba(0,0,0,0.08); transform: translateY(-3px); }
+  .research-icon {
+    width: 44px; height: 44px;
+    background: var(--teal-lt);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+  .research-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--slate); }
+  .research-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+
+  /* ─── PEOPLE ─── */
+  #people { background: var(--bg2); }
+
+  .team-section-label {
+    font-size: 1rem; font-weight: 600; color: var(--slate);
+    margin: 2rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--teal-lt);
+  }
+
+  .team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 1.25rem; margin-bottom: 0.5rem; }
+
+  /* clickable team card */
+  a.team-card, .team-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  a.team-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.1); transform: translateY(-3px); }
+  .team-avatar {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: var(--teal-lt);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 600; font-size: 1.1rem; color: var(--teal-dk);
+    margin: 0 auto 0.75rem;
+    overflow: hidden;
+  }
+  .team-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block; }
+  .team-name { font-size: 0.9rem; font-weight: 600; color: var(--slate); }
+  .team-role { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+  .view-hint { font-size: 0.72rem; color: var(--teal); margin-top: 6px; font-weight: 600; }
+
+  /* ─── PUBLICATIONS ─── */
+  .pub-list { list-style: none; }
+  .pub-item {
+    display: grid; grid-template-columns: 56px 1fr;
+    gap: 1.25rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border);
+    align-items: start;
+  }
+  .pub-year {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    color: var(--teal);
+    text-align: center;
+    line-height: 1;
+    padding-top: 3px;
+  }
+  .pub-title { font-size: 0.95rem; font-weight: 600; color: var(--slate); margin-bottom: 0.3rem; }
+  .pub-authors { font-size: 0.82rem; color: var(--muted); margin-bottom: 0.3rem; }
+  .pub-journal { font-size: 0.8rem; color: var(--teal-dk); font-style: italic; }
+  .pub-tag {
+    display: inline-block; background: var(--teal-lt); color: var(--teal-dk);
+    font-size: 0.7rem; font-weight: 700; padding: 0.1rem 0.5rem;
+    border-radius: 4px; margin-left: 0.5rem; vertical-align: middle;
+  }
+
+  /* ─── FACILITIES ─── */
+  #facilities { background: var(--bg2); }
+  .facility-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; }
+  .facility-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+  }
+  .facility-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--slate); }
+  .facility-card p { font-size: 0.83rem; color: var(--muted); }
+
+  /* ─── GALLERY ─── */
+  #gallery { background: var(--bg); }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+  .gallery-item {
+    position: relative; border-radius: var(--radius); overflow: hidden;
+    aspect-ratio: 4/3; background: var(--teal-lt); cursor: pointer;
+  }
+  .gallery-item img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.3s; }
+  .gallery-item:hover img { transform: scale(1.05); }
+  .gallery-item .gallery-caption {
+    position:absolute; bottom:0; left:0; right:0;
+    background:linear-gradient(transparent, rgba(4,52,44,0.85));
+    color:#fff; font-size:0.82rem; font-weight:500;
+    padding:1.5rem 0.9rem 0.75rem;
+    opacity:0; transition:opacity 0.25s;
+  }
+  .gallery-item:hover .gallery-caption { opacity:1; }
+  .gallery-placeholder {
+    width:100%; height:100%; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; gap:0.5rem;
+    color:var(--teal-dk); font-size:0.82rem; text-align:center; padding:1rem;
+  }
+  .gallery-placeholder span { font-size:2rem; }
+  .lightbox { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9); z-index:1000; align-items:center; justify-content:center; padding:2rem; }
+  .lightbox.open { display:flex; }
+  .lightbox img { max-width:90vw; max-height:85vh; border-radius:8px; object-fit:contain; }
+  .lightbox-close { position:absolute; top:1.5rem; right:2rem; color:#fff; font-size:2rem; cursor:pointer; background:none; border:none; line-height:1; }
+  .lightbox-caption { position:absolute; bottom:2rem; left:50%; transform:translateX(-50%); color:rgba(255,255,255,0.8); font-size:0.9rem; }
+
+  /* ─── NEWS ─── */
+  .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+  .news-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--bg);
+  }
+  .news-thumb { height: 6px; background: linear-gradient(90deg, var(--teal), var(--amber)); }
+  .news-body { padding: 1.25rem; }
+  .news-date { font-size: 0.75rem; color: var(--muted); margin-bottom: 0.4rem; }
+  .news-title { font-size: 0.95rem; font-weight: 600; color: var(--slate); margin-bottom: 0.5rem; line-height: 1.4; }
+  .news-desc { font-size: 0.83rem; color: var(--muted); }
+
+  /* ─── CONTACT ─── */
+  #contact { background: #04342C; color: #fff; }
+  #contact .section-title { color: #fff; }
+  #contact .section-subtitle { color: rgba(255,255,255,0.65); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+  .contact-info-block { margin-bottom: 1.5rem; }
+  .contact-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 0.3rem; }
+  .contact-value { color: rgba(255,255,255,0.9); font-size: 0.95rem; }
+  .contact-value a { color: #9FE1CB; text-decoration: none; }
+  .contact-form-area {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 14px;
+    padding: 2rem;
+  }
+  .form-row { margin-bottom: 1rem; }
+  .form-row label { display: block; font-size: 0.82rem; color: rgba(255,255,255,0.6); margin-bottom: 0.35rem; }
+  .form-row input,
+  .form-row textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 8px;
+    padding: 0.65rem 0.9rem;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-row input:focus, .form-row textarea:focus { border-color: var(--teal); }
+  .form-row textarea { resize: vertical; min-height: 100px; }
+  .form-submit {
+    background: var(--teal);
+    color: #fff;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 100px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .form-submit:hover { background: var(--teal-dk); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: #02221A;
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 1.5rem 2rem;
+    font-size: 0.82rem;
+  }
+  footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; flex-direction: column; }
+    .nav-links.open { display: flex; position: absolute; top: 64px; left: 0; right: 0; background: #fff; padding: 1rem 2rem; border-bottom: 1px solid var(--border); gap: 1.25rem; }
+    .nav-toggle { display: block; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; }
+    .pi-highlight { grid-template-columns: 1fr; text-align: center; }
+    .pi-photo-circle { margin: 0 auto; }
+    .pi-chips { justify-content: center; }
+    .hero-stats { gap: 1.5rem; }
+    .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ───────────── NAV ───────────── -->
+<nav>
+  <!-- EDIT: To add your logo: replace the text span with <img src="logo.png" alt="Chemistry of Atmospheric Pollutants Lab" /> -->
+  <a class="nav-logo" href="#">
+    <span>Chemistry of Atmospheric Pollutants Lab · IIT Bombay</span>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#pi">Principal Investigator</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#people">People</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#facilities">Facilities</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#news">News</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Toggle menu">☰</button>
+</nav>
+
+<!-- ───────────── HERO ───────────── -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <span class="hero-eyebrow">Environmental Science &amp; Engineering Department · Indian Institute of Technology Bombay</span>
+    <h1>Understanding the <em>chemistry</em> that shapes the air we breathe</h1>
+    <p>We investigate secondary aerosol formation, optical properties of aerosols, indoor air quality, fog–aerosol interactions, long-term atmospheric trends, and the chemistry of high-pollution episodes across India.</p>
+    <div class="hero-btns">
+      <a href="#research" class="btn-primary">Explore Our Research</a>
+      <a href="#contact" class="btn-outline">Join the Lab</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <span class="hero-stat-num">18</span>
+        <div class="hero-stat-label">Lab Members</div>
+      </div>
+      <div>
+        <span class="hero-stat-num">20+</span>
+        <div class="hero-stat-label">Publications</div>
+      </div>
+      <div>
+        <span class="hero-stat-num">3</span>
+        <div class="hero-stat-label">Active Projects</div>
+      </div>
+      <div>
+        <span class="hero-stat-num">2019</span>
+        <div class="hero-stat-label">Founded</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── ABOUT ───────────── -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <div class="section-eyebrow">Who We Are</div>
+        <h2 class="section-title">Chemistry of Atmospheric Pollutants Research Laboratory</h2>
+        <p style="color:var(--muted); margin-bottom:1.25rem;">
+          We are a research group at the <strong style="color:var(--slate);">Indian Institute of Technology Bombay</strong>,
+          dedicated to understanding the chemical composition, formation mechanisms, and transformation
+          pathways of atmospheric pollutants — from individual molecules to city-scale pollution episodes.
+        </p>
+        <p style="color:var(--muted); margin-bottom:1.25rem;">
+          Our research spans secondary aerosol formation, aerosol optical characterisation, indoor air quality,
+          fog–aerosol interactions, tropospheric ozone chemistry, and long-term trends of aerosols in the
+          atmosphere. We combine field measurements, laboratory experiments, satellite data, and
+          atmospheric modelling to build a comprehensive picture of air pollution over India.
+        </p>
+        <p style="color:var(--muted); margin-bottom:2rem;">
+          Our findings directly support evidence-based environmental policy, public health assessment,
+          and sustainable urban planning — particularly in the context of rapidly growing South Asian cities.
+          Reach us at
+          <a href="mailto:caps.iitb@gmail.com" style="color:var(--teal-dk); font-weight:600;">caps.iitb@gmail.com</a>.
+        </p>
+        <div>
+          <span class="about-pill">🌫️ Secondary Aerosol Formation</span>
+          <span class="about-pill">🔭 Aerosol Optical Properties</span>
+          <span class="about-pill">🌡️ Tropospheric Ozone</span>
+          <span class="about-pill">🏠 Indoor Air Quality</span>
+          <span class="about-pill">📡 High Pollution Episodes</span>
+          <span class="about-pill">🧪 Organo Nitrates &amp; Sulfates</span>
+          <span class="about-pill">💧 Fog–Aerosol Interactions</span>
+          <span class="about-pill">📈 Long-Term Aerosol Trends</span>
+          <span class="about-pill">💨 Air Pollution Modelling</span>
+          <span class="about-pill">🗺️ GIS &amp; Exposure Assessment</span>
+        </div>
+      </div>
+      <div class="about-visual">
+        <!-- EDIT: Replace SVG with a lab photo:
+             <img src="lab-photo.jpg" alt="CAP Lab" /> -->
+        <svg class="molecule-svg" viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="80" r="18" fill="#1D9E75"/><circle cx="50" cy="50" r="12" fill="#0F6E56"/><circle cx="150" cy="50" r="12" fill="#0F6E56"/><circle cx="50" cy="110" r="12" fill="#0F6E56"/><circle cx="150" cy="110" r="12" fill="#0F6E56"/><circle cx="20" cy="30" r="8" fill="#5DCAA5"/><circle cx="180" cy="30" r="8" fill="#5DCAA5"/><circle cx="20" cy="130" r="8" fill="#5DCAA5"/><circle cx="180" cy="130" r="8" fill="#5DCAA5"/>
+          <line x1="100" y1="80" x2="50" y2="50" stroke="#1D9E75" stroke-width="2.5"/><line x1="100" y1="80" x2="150" y2="50" stroke="#1D9E75" stroke-width="2.5"/><line x1="100" y1="80" x2="50" y2="110" stroke="#1D9E75" stroke-width="2.5"/><line x1="100" y1="80" x2="150" y2="110" stroke="#1D9E75" stroke-width="2.5"/><line x1="50" y1="50" x2="20" y2="30" stroke="#0F6E56" stroke-width="1.5"/><line x1="150" y1="50" x2="180" y2="30" stroke="#0F6E56" stroke-width="1.5"/><line x1="50" y1="110" x2="20" y2="130" stroke="#0F6E56" stroke-width="1.5"/><line x1="150" y1="110" x2="180" y2="130" stroke="#0F6E56" stroke-width="1.5"/>
+          <text x="95" y="84" fill="#fff" font-size="8" font-weight="bold" font-family="Inter,sans-serif">NO₂</text><text x="39" y="54" fill="#9FE1CB" font-size="7" font-family="Inter,sans-serif">O₃</text><text x="143" y="54" fill="#9FE1CB" font-size="7" font-family="Inter,sans-serif">SO₂</text><text x="37" y="114" fill="#9FE1CB" font-size="7" font-family="Inter,sans-serif">PM₂.₅</text><text x="140" y="114" fill="#9FE1CB" font-size="7" font-family="Inter,sans-serif">VOC</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── PRINCIPAL INVESTIGATOR ───────────── -->
+<section id="pi" style="background:var(--bg); padding:5rem 2rem;">
+  <div class="container">
+    <div class="section-eyebrow">Lab Leadership</div>
+    <h2 class="section-title">Principal Investigator</h2>
+
+    <!-- PI Card — clicking opens people/pi.html -->
+    <a href="people/pi.html" style="text-decoration:none; color:inherit; display:block;">
+      <div style="
+        display:grid;
+        grid-template-columns:160px 1fr;
+        gap:2.5rem;
+        align-items:start;
+        background:var(--bg);
+        border:1px solid var(--border);
+        border-radius:14px;
+        padding:2rem;
+        margin-bottom:2rem;
+        transition:box-shadow 0.2s, transform 0.2s;
+      "
+      onmouseover="this.style.boxShadow='0 12px 32px rgba(0,0,0,0.08)'; this.style.transform='translateY(-3px)'"
+      onmouseout="this.style.boxShadow='none'; this.style.transform='translateY(0)'"
+      >
+        <!-- Photo -->
+        <div style="
+          width:160px; height:160px;
+          border-radius:12px;
+          background:var(--teal-lt);
+          display:flex; align-items:center; justify-content:center;
+          font-family:'DM Serif Display',serif;
+          font-size:3rem; color:var(--teal-dk);
+          overflow:hidden; flex-shrink:0;
+        ">
+          <!-- EDIT: Replace with real photo:
+               <img src="photos/pi.jpg" alt="Prof. Abhishek Chakraborty"
+                    style="width:100%;height:100%;object-fit:cover;" /> -->
+          <img src="photos/Abhishek-Chakraborty.jpeg" 
+     alt="Prof. Abhishek Chakraborty"
+     style="width:100%;height:100%;object-fit:cover;"
+     onerror="this.style.display='none';this.parentElement.textContent='AC';" />
+
+        <!-- Info -->
+        <div>
+          <!-- Role badge -->
+          <div style="
+            display:inline-block;
+            font-size:0.7rem; font-weight:700;
+            letter-spacing:0.12em; text-transform:uppercase;
+            color:var(--teal-dk);
+            background:var(--teal-lt);
+            padding:0.25rem 0.75rem;
+            border-radius:100px;
+            margin-bottom:0.75rem;
+          ">Principal Investigator · Core Faculty</div>
+
+          <!-- Name -->
+          <div style="font-family:'DM Serif Display',serif; font-size:1.8rem; color:var(--slate); line-height:1.1; margin-bottom:0.25rem;">
+            Prof. Abhishek Chakraborty
+          </div>
+
+          <!-- Title -->
+          <div style="font-size:0.88rem; font-weight:600; color:var(--muted); margin-bottom:1rem;">
+            Assistant Professor · Environmental Science &amp; Engineering Department, IIT Bombay
+          </div>
+
+          <!-- Bio -->
+          <p style="font-size:0.9rem; color:var(--muted); line-height:1.75; margin-bottom:1.25rem;">
+            Prof. Chakraborty leads the Chemistry of Atmospheric Pollutants (CAP) Laboratory at IIT Bombay
+            (Room ES 408, ESED-DESE Building). His doctoral work at IIT Kanpur focused on fog and organic aerosol
+            interactions — their sources, composition, and chemistry. His research interests include atmospheric
+            processing of organic aerosols, fog–smog–aerosol interactions, physicochemical characterisation and
+            source apportionment of aerosols, real-time air pollution monitoring, and air pollution control technologies.
+            He has been cited over 1,100 times and is an awardee of the Academic Excellence Award, IIT Kanpur.
+          </p>
+
+          <!-- Contact & profile links -->
+          <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:1rem;"
+               onclick="event.stopPropagation()">
+            <a href="mailto:abhishekc@iitb.ac.in"
+               style="font-size:0.78rem; font-weight:600; color:var(--teal-dk); text-decoration:none; border:1px solid var(--border); padding:0.3rem 0.8rem; border-radius:100px; transition:background 0.15s;"
+               onmouseover="this.style.background='var(--teal-lt)'" onmouseout="this.style.background='transparent'">
+              📧 abhishekc@iitb.ac.in
+            </a>
+            <a href="tel:+912225765853"
+               style="font-size:0.78rem; font-weight:600; color:var(--teal-dk); text-decoration:none; border:1px solid var(--border); padding:0.3rem 0.8rem; border-radius:100px; transition:background 0.15s;"
+               onmouseover="this.style.background='var(--teal-lt)'" onmouseout="this.style.background='transparent'">
+              📞 +91-22-2576-5853
+            </a>
+            <a href="https://scholar.google.co.in/citations?user=p-YycrQAAAAJ" target="_blank"
+               style="font-size:0.78rem; font-weight:600; color:var(--teal-dk); text-decoration:none; border:1px solid var(--border); padding:0.3rem 0.8rem; border-radius:100px; transition:background 0.15s;"
+               onmouseover="this.style.background='var(--teal-lt)'" onmouseout="this.style.background='transparent'">
+              📚 Google Scholar
+            </a>
+            <a href="https://www.scopus.com/authid/detail.uri?authorId=36909389300" target="_blank"
+               style="font-size:0.78rem; font-weight:600; color:var(--teal-dk); text-decoration:none; border:1px solid var(--border); padding:0.3rem 0.8rem; border-radius:100px; transition:background 0.15s;"
+               onmouseover="this.style.background='var(--teal-lt)'" onmouseout="this.style.background='transparent'">
+              🔬 Scopus
+            </a>
+            <a href="https://orcid.org/0000-0001-9531-6419" target="_blank"
+               style="font-size:0.78rem; font-weight:600; color:var(--teal-dk); text-decoration:none; border:1px solid var(--border); padding:0.3rem 0.8rem; border-radius:100px; transition:background 0.15s;"
+               onmouseover="this.style.background='var(--teal-lt)'" onmouseout="this.style.background='transparent'">
+              🆔 ORCID
+            </a>
+            <a href="https://www.linkedin.com/in/chemistry-of-atmospheric-pollutants-research-laboratory-1ab634397/" target="_blank"
+               style="font-size:0.78rem; font-weight:600; color:var(--teal-dk); text-decoration:none; border:1px solid var(--border); padding:0.3rem 0.8rem; border-radius:100px; transition:background 0.15s;"
+               onmouseover="this.style.background='var(--teal-lt)'" onmouseout="this.style.background='transparent'">
+              🔗 LinkedIn
+            </a>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Education cards -->
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1rem; margin-top:0.5rem;">
+
+      <div style="background:var(--bg); border:1px solid var(--border); border-radius:var(--radius); padding:1.25rem;">
+        <div style="font-size:0.7rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal); margin-bottom:0.5rem;">
+          PhD
+        </div>
+        <div style="font-weight:600; color:var(--slate); font-size:0.95rem; margin-bottom:0.15rem;">
+          Civil &amp; Environmental Engineering
+        </div>
+        <div style="color:var(--muted); font-size:0.85rem; margin-bottom:0.25rem;">IIT Kanpur</div>
+        <div style="color:var(--muted); font-size:0.8rem; font-style:italic; line-height:1.5;">
+          Thesis: Fog and organic aerosol interactions — sources, composition, and chemistry
+        </div>
+      </div>
+
+      <div style="background:var(--bg); border:1px solid var(--border); border-radius:var(--radius); padding:1.25rem;">
+        <div style="font-size:0.7rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal); margin-bottom:0.5rem;">
+          M.Tech
+        </div>
+        <div style="font-weight:600; color:var(--slate); font-size:0.95rem; margin-bottom:0.15rem;">
+          Environmental Engineering
+        </div>
+        <div style="color:var(--muted); font-size:0.85rem; margin-bottom:0.25rem;">IIT Kanpur</div>
+        <div style="color:var(--muted); font-size:0.8rem; font-style:italic; line-height:1.5;">
+          Thesis: Chemical characterisation of submicron aerosol in Kanpur — source apportionment
+        </div>
+      </div>
+
+      <div style="background:var(--bg); border:1px solid var(--border); border-radius:var(--radius); padding:1.25rem;">
+        <div style="font-size:0.7rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal); margin-bottom:0.5rem;">
+          B.E.
+        </div>
+        <div style="font-weight:600; color:var(--slate); font-size:0.95rem; margin-bottom:0.15rem;">
+          Civil Engineering
+        </div>
+        <div style="color:var(--muted); font-size:0.85rem;">
+          Bengal Engineering and Science University, Shibpur (now IIEST)
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── RESEARCH AREAS ───────────── -->
+<section id="research" style="background:var(--bg2);">
+  <div class="container">
+    <div class="section-eyebrow">What We Study</div>
+    <h2 class="section-title">Research Areas</h2>
+    <p class="section-subtitle">Our work spans the full lifecycle of air pollutants — from emission to deposition.</p>
+    <div class="research-grid">
+      <div class="research-card"><div class="research-icon">🌫️</div><h3>Secondary Aerosol Formation</h3><p>Investigating the formation pathways of secondary organic aerosols (SOA) and secondary inorganic aerosols from gas-phase precursors including VOCs, NOₓ, and SO₂ under varying atmospheric conditions.</p></div>
+      <div class="research-card"><div class="research-icon">🔭</div><h3>Aerosol Optical Properties</h3><p>Accessing and quantifying optical characteristics of aerosols — including scattering, absorption, and extinction coefficients — and understanding their role in radiative forcing and climate.</p></div>
+      <div class="research-card"><div class="research-icon">🌡️</div><h3>Heatwaves &amp; Tropospheric Ozone</h3><p>Studying the interplay between extreme heat events, wildfire emissions, and tropospheric ozone chemistry, with a focus on how heatwaves amplify atmospheric pollutant formation.</p></div>
+      <div class="research-card"><div class="research-icon">🏠</div><h3>Indoor Air Quality &amp; Health</h3><p>Characterising indoor aerosol chemistry and its impact on human health using GIS-based spatial analysis to map exposure patterns across urban environments.</p></div>
+      <div class="research-card"><div class="research-icon">📡</div><h3>Air Quality during High Pollution Episodes</h3><p>Ground-reanalysis of CPCB–CAMS data, secondary aerosol formation chemistry during high pollution episodes, and statistical and regression-based air quality analysis.</p></div>
+      <div class="research-card"><div class="research-icon">🔗</div><h3>Emission &amp; Air Quality Linkages in India</h3><p>Establishing source–receptor relationships between emission inventories and observed air quality trends across Indian cities, informing mitigation policy.</p></div>
+      <div class="research-card"><div class="research-icon">🧪</div><h3>Organo Nitrates &amp; Organo Sulfates</h3><p>Chemical characterisation of organo nitrates and organo sulfates as key products of atmospheric oxidation chemistry and their contribution to aerosol mass loading.</p></div>
+      <div class="research-card"><div class="research-icon">💨</div><h3>Air Quality &amp; Exposure Assessment</h3><p>Integrated assessment of population exposure to fine particulate matter using atmospheric chemistry models, aerosol science, and air pollution modelling frameworks.</p></div>
+      <div class="research-card"><div class="research-icon">💧</div><h3>Aqueous Processing &amp; Fog–Aerosol Interactions</h3><p>Exploring aqueous-phase chemistry in fog droplets and cloud water, and how fog–aerosol interactions alter the chemical composition and size distribution of atmospheric particles.</p></div>
+      <div class="research-card"><div class="research-icon">📏</div><h3>Size-Resolved Secondary Aerosol Formation</h3><p>Size-segregated analysis of secondary aerosol formation to understand how particle size governs reactivity, lifetime, deposition, and health impacts.</p></div>
+      <div class="research-card"><div class="research-icon">📈</div><h3>Long-Term Trends of Aerosols</h3><p>Analysing multi-year datasets to identify long-term trends in aerosol loading, chemical composition, and optical properties across the Indian subcontinent.</p></div>
+      <div class="research-card"><div class="research-icon">🌦️</div><h3>Meteorological Influence on Pollutant Dispersion</h3><p>Understanding how boundary layer dynamics, wind patterns, temperature inversions, and monsoon meteorology control the transport and accumulation of atmospheric pollutants.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── PEOPLE ───────────── -->
+<section id="people">
+  <div class="container">
+    <div class="section-eyebrow">The Team</div>
+    <h2 class="section-title">People</h2>
+    <p class="section-subtitle">Click any member's card to view their full profile, research interests, and publications.</p>
+
+    <!-- ── PhD Students ── -->
+    <div class="team-section-label">PhD Students</div>
+    <div class="team-grid" style="margin-bottom:2rem;">
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Sathish-Yasarapu.jpeg" alt="Sathish Yasarapu"
+               onerror="this.style.display='none';this.parentElement.textContent='SY';" />
+        </div>
+        <div class="team-name">Sathish Yasarapu</div>
+        <div class="team-role">PhD Student · 2022–Present</div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Vidit-Parkar.jpeg" alt="Vidit Parkar"
+               onerror="this.style.display='none';this.parentElement.textContent='VP';" />
+        </div>
+        <div class="team-name">Vidit Parkar</div>
+        <div class="team-role">PhD Student · 2023–Present</div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Jayaraju-Pakki.jpeg" alt="Jayaraju Pakki"
+               onerror="this.style.display='none';this.parentElement.textContent='JP';" />
+        </div>
+        <div class="team-name">Jayaraju Pakki</div>
+        <div class="team-role">PhD Student · 2023–Present</div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Megha-Anand.jpeg" alt="Megha Anand"
+               onerror="this.style.display='none';this.parentElement.textContent='MA';" />
+        </div>
+        <div class="team-name">Megha Anand</div>
+        <div class="team-role">PhD Student · 2024–Present</div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Diyalakshmi.jpeg" alt="Moirangthem Diyalakshmi Devi"
+               onerror="this.style.display='none';this.parentElement.textContent='MD';" />
+        </div>
+        <div class="team-name">Moirangthem Diyalakshmi Devi</div>
+        <div class="team-role">PhD Student · 2024–Present</div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Madhumita-Mahant.jpg" alt="Madhumita Mahant"
+               onerror="this.style.display='none';this.parentElement.textContent='MM';" />
+        </div>
+        <div class="team-name">Madhumita Mahant</div>
+        <div class="team-role">PhD Student · 2025–Present</div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Pranjal-Pandey.jpg" alt="Pranjal Pandey"
+               onerror="this.style.display='none';this.parentElement.textContent='PP';" />
+        </div>
+        <div class="team-name">Pranjal Pandey</div>
+        <div class="team-role">PhD Student · 2025–Present</div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Aditi-Das.jpg" alt="Aditi Das"
+               onerror="this.style.display='none';this.parentElement.textContent='AD';" />
+        </div>
+        <div class="team-name">Aditi Das</div>
+        <div class="team-role">PhD Student · 2026–Present</div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Suzal.jpeg" alt="Suzal"
+               onerror="this.style.display='none';this.parentElement.textContent='SZ';" />
+        </div>
+        <div class="team-name">Suzal</div>
+        <div class="team-role">PhD Student · 2026–Present</div>
+      </div>
+
+    </div>
+
+    <!-- ── Project Staff & Postdocs ── -->
+    <div class="team-section-label">Project Staff &amp; Postdocs</div>
+    <div class="team-grid" style="margin-bottom:2rem;">
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Satya-Sahu.jpeg" alt="Satya Sahu"
+               onerror="this.style.display='none';this.parentElement.textContent='SS';" />
+        </div>
+        <div class="team-name">Satya Sahu</div>
+        <div class="team-role">Project Staff</div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Samrat-Santra.jpeg" alt="Samrat Santra"
+               onerror="this.style.display='none';this.parentElement.textContent='SS';" />
+        </div>
+        <div class="team-name">Dr. Samrat Santra</div>
+        <div class="team-role">Postdoctoral Researcher</div>
+      </div>
+
+    </div>
+
+    <!-- ── Master's Students ── -->
+    <div class="team-section-label">Master's Students</div>
+    <div class="team-grid" style="margin-bottom:2rem;">
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Swati-Ray.jpg" alt="Swati Ray"
+               onerror="this.style.display='none';this.parentElement.textContent='SR';" />
+        </div>
+        <div class="team-name">Swati Ray</div>
+        <div class="team-role">M.Tech Student</div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Anjana-Ap.jpeg" alt="Anjana Ap"
+               onerror="this.style.display='none';this.parentElement.textContent='AA';" />
+        </div>
+        <div class="team-name">Anjana Ap</div>
+        <div class="team-role">M.Sc.-PhD Student</div>
+      </div>
+
+    </div>
+
+    <!-- ── Dual Degree Students ── -->
+    <div class="team-section-label">Dual Degree Students</div>
+    <div class="team-grid" style="margin-bottom:2rem;">
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Rishi-Bhande.jpg" alt="Rishi Bhande"
+               onerror="this.style.display='none';this.parentElement.textContent='RB';" />
+        </div>
+        <div class="team-name">Rishi Bhande</div>
+        <div class="team-role">Dual Degree (B.Tech. + M.Tech.) Student</div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Utprabh-Pama.png" alt="Utprabh Pama"
+               onerror="this.style.display='none';this.parentElement.textContent='UP';" />
+        </div>
+        <div class="team-name">Utprabh Pama</div>
+        <div class="team-role">Dual Degree (B.Tech. + M.Tech.) Student</div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Vaibhav-Chand.jpeg" alt="Vaibhav Chand"
+               onerror="this.style.display='none';this.parentElement.textContent='VC';" />
+        </div>
+        <div class="team-name">Vaibhav Chand</div>
+        <div class="team-role">Dual Degree (B.Tech. + M.Tech.) Student</div>
+      </div>
+
+    </div>
+
+    <!-- ── Research Interns ── -->
+    <div class="team-section-label">Research Interns</div>
+    <div class="team-grid" style="margin-bottom:2rem;">
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Paripreet-Kaur.jpeg" alt="Paripreet Kaur"
+               onerror="this.style.display='none';this.parentElement.textContent='PK';" />
+        </div>
+        <div class="team-name">Paripreet Kaur</div>
+        <div class="team-role">Research Intern</div>
+      </div>
+
+    </div>
+
+    <!-- ── Alumni ── -->
+    <div class="team-section-label">Lab Alumni</div>
+    <div class="team-grid" style="margin-bottom:2rem;">
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Debayan-Mandal.jpeg" alt="Debayan Mandal"
+               onerror="this.style.display='none';this.parentElement.textContent='DM';" />
+        </div>
+        <div class="team-name">Debayan Mandal</div>
+        <div class="team-role">PhD Student · 2019–2026</div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Shruti-Tripathi.jpg" alt="Shruti Tripathi"
+               onerror="this.style.display='none';this.parentElement.textContent='ST';" />
+        </div>
+        <div class="team-name">Shruti Tripathi</div>
+        <div class="team-role">PhD Student · 2019–2026</div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Senthil-Vikram-Vodapalli.jpeg" alt="Senthil Vikram Vodapalli"
+               onerror="this.style.display='none';this.parentElement.textContent='SV';" />
+        </div>
+        <div class="team-name">Senthil Vikram Vodapalli</div>
+        <div class="team-role">Dual Degree · 2018–2023</div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Prathmesh-Namdeo.jpeg" alt="Prathmesh Namdeo"
+               onerror="this.style.display='none';this.parentElement.textContent='PN';" />
+        </div>
+        <div class="team-name">Prathmesh Namdeo</div>
+        <div class="team-role">Dual Degree · 2019–2024</div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Tushar-Singh.jpeg" alt="Tushar Singh"
+               onerror="this.style.display='none';this.parentElement.textContent='TS';" />
+        </div>
+        <div class="team-name">Tushar Singh</div>
+        <div class="team-role">M.Tech Student · 2024–2026</div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Siddhi-Pallod.webp" alt="Siddhi Pallod"
+               onerror="this.style.display='none';this.parentElement.textContent='SP';" />
+        </div>
+        <div class="team-name">Siddhi Pallod</div>
+        <div class="team-role">Dual Degree · 2021–2026</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── PUBLICATIONS ───────────── -->
+<section id="publications" style="background:var(--bg2);">
+  <div class="container">
+    <h2 class="section-title">Selected Publications</h2>
+    <p class="section-subtitle">Key contributions from the lab. For a full list, see Google Scholar.</p>
+    <ul class="pub-list">
+<li class="pub-item">
+  <div class="pub-year">2026</div>
+  <div>
+    <div class="pub-title">
+      Size-resolved aerosol (≤9 µm) concentrations and chemical characterization: Influence of aerosol liquid water content (ALWC) and inorganic ions on WSOC formation and characteristics
+    </div>
+    <div class="pub-authors">Sathish, Y., &amp; Chakraborty, A.</div>
+    <div class="pub-journal">
+      Atmospheric Environment, 374, 121956 &nbsp;·&nbsp;
+      <a href="https://doi.org/10.1016/j.atmosenv.2026.121956" target="_blank"
+         style="color:var(--teal); font-size:0.78rem; text-decoration:none; font-weight:600;">
+        DOI: 10.1016/j.atmosenv.2026.121956 →
+      </a>
+    </div>
+  </div>
+</li>
+<li class="pub-item">
+  <div class="pub-year">2025</div>
+  <div>
+    <div class="pub-title">
+      Assessment of key air pollutants in an eastern Indian urban area: Levels, characteristics, and risk assessment
+    </div>
+    <div class="pub-authors">
+      Dutta, A., Srivastav, D., Devi, M. D., Chand, V., Pama, U., Gupta, A., Shukla, P. C., &amp; Chakraborty, A.
+    </div>
+    <div class="pub-journal">
+      Urban Climate, 65, 102725
+      &nbsp;·&nbsp;
+      <a href="https://doi.org/10.1016/j.uclim.2025.102725" target="_blank"
+         style="color:var(--teal); text-decoration:none; font-size:0.78rem; font-weight:600;">
+        DOI: 10.1016/j.uclim.2025.102725 →
+      </a>
+    </div>
+  </div>
+</li>
+<li class="pub-item">
+  <div class="pub-year">2025</div>
+  <div>
+    <div class="pub-title">
+      Strong influence of NO–NO₂–Oₓ on brown carbon (BrC) absorption characteristics: Seasonal and diurnal variations
+    </div>
+    <div class="pub-authors">
+      Sathish, Y., Chakraborty, A., & Tripathi, S.
+    </div>
+    <div class="pub-journal">
+      Atmospheric Pollution Research, 16(11), 102602 (2025)
+    </div>
+    <a href="https://doi.org/10.1016/j.apr.2025.102602"
+       target="_blank"
+       style="font-size:0.75rem; color:var(--teal); text-decoration:none; margin-top:4px; display:inline-block;">
+      DOI: 10.1016/j.apr.2025.102602 →
+    </a>
+  </div>
+</li>
+<li class="pub-item">
+  <div class="pub-year">2025</div>
+  <div>
+    <div class="pub-title">
+      Spatial heterogeneity of indoor carbonaceous aerosol levels and characteristics: comparison with the outdoors and implications for secondary organic aerosol formation and health effects
+      <span class="pub-tag">CAP Lab</span>
+    </div>
+    <div class="pub-authors">
+      Mandal, D., Chakraborty, A., & Tripathi, S.
+    </div>
+    <div class="pub-journal">
+      Journal of Atmospheric Chemistry, 82, 11 (2025)
+    </div>
+    <a href="https://doi.org/10.1007/s10874-025-09476-3"
+       target="_blank"
+       style="font-size:0.75rem; color:var(--teal); text-decoration:none; margin-top:4px; display:inline-block;">
+      DOI: 10.1007/s10874-025-09476-3 →
+    </a>
+  </div>
+</li>
+<li class="pub-item">
+  <div class="pub-year">2025</div>
+  <div>
+    <div class="pub-title">
+      Physicochemical Characterization and Risk Assessment of Indoor Particulate Matter in Academic Canteens: Comparison with Outdoor and Insights from Aerosol Mass Spectrometer
+      <span class="pub-tag">CAP Lab</span>
+    </div>
+    <div class="pub-authors">
+      Mandal, D., Chakraborty, A., Tripathi, S., & Tripathi, S. N.
+    </div>
+    <div class="pub-journal">
+      Atmospheric Environment, 121490 (2025) · In Press
+    </div>
+    <a href="https://doi.org/10.1016/j.atmosenv.2025.121490"
+       target="_blank"
+       style="font-size:0.75rem; color:var(--teal); text-decoration:none; margin-top:4px; display:inline-block;">
+      DOI: 10.1016/j.atmosenv.2025.121490 →
+    </a>
+  </div>
+</li>
+    </ul>
+    <div style="margin-top:2rem;">
+      <a href="https://scholar.google.com/citations?user=p-YycrQAAAAJ&hl=en" target="_blank" class="btn-primary" style="background:var(--teal); color:#fff; display:inline-block;">View All on Google Scholar →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── FACILITIES ───────────── -->
+<section id="facilities">
+  <div class="container">
+    <div class="section-eyebrow">Infrastructure</div>
+    <h2 class="section-title">Lab Facilities &amp; Instruments</h2>
+    <p class="section-subtitle">Our laboratory is equipped with state-of-the-art analytical instruments for atmospheric research.</p>
+    <div class="facility-grid">
+      <div class="facility-card"><h3>⚗️ ACSM</h3><p>Provides near-real-time measurements of the chemical composition and mass concentrations of non-refractory submicron particulate matter.</p></div>
+      <div class="facility-card"><h3>🪨 CASS</h3><p>Used to measure and characterize carbonaceous aerosol components, particularly organic carbon (OC) and elemental carbon (EC), in particulate matter.</p></div>
+      <div class="facility-card"><h3>🔥 OC-EC Analyzer</h3><p>Used to measure organic carbon (OC) and elemental carbon (EC) in particulate matter, typically using thermal–optical analysis.</p></div>
+      <div class="facility-card"><h3>📉 Aethalometer (AE36)</h3><p>Real-time measurement of black carbon and brown carbon concentrations with source apportionment capability.</p></div>
+      <div class="facility-card"><h3>👁️ Visibility Sensor</h3><p>Instrument that measures atmospheric visibility by detecting the scattering of light caused by airborne particles and aerosols.</p></div>
+      <div class="facility-card"><h3>🌤️ Automatic Weather Station</h3><p>Continuously measures and records meteorological parameters such as temperature, humidity, wind speed and direction, rainfall, and atmospheric pressure.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── GALLERY ───────────── -->
+<section id="gallery" style="background:var(--bg2);">
+  <div class="container">
+    <div class="section-eyebrow">Lab Life</div>
+    <h2 class="section-title">Gallery</h2>
+    <p class="section-subtitle">A glimpse into our lab, fieldwork, and team events.</p>
+    <div class="gallery-grid" id="galleryGrid">
+      <!--
+        HOW TO ADD PHOTOS:
+        1. Put your .jpg/.png photos in a folder called "photos/" next to index.html
+        2. For each photo, copy this block and update src and caption:
+
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img src="photos/your-photo.jpg" alt="Caption" data-caption="Caption text shown in lightbox" />
+          <div class="gallery-caption">Caption text</div>
+        </div>
+
+        Delete the placeholder tiles below once you add real photos.
+      -->
+      <div class="gallery-item"><div class="gallery-placeholder"><span>🔬</span>Lab Instrument Photo<br><small>Add: photos/lab1.jpg</small></div></div>
+      <div class="gallery-item"><div class="gallery-placeholder"><span>🌫️</span>Field Sampling Campaign<br><small>Add: photos/field1.jpg</small></div></div>
+      <div class="gallery-item"><div class="gallery-placeholder"><span>👩‍🔬</span>Team Photo<br><small>Add: photos/team1.jpg</small></div></div>
+      <div class="gallery-item"><div class="gallery-placeholder"><span>🏆</span>Award / Conference<br><small>Add: photos/event1.jpg</small></div></div>
+      <div class="gallery-item"><div class="gallery-placeholder"><span>🌆</span>Sampling Site<br><small>Add: photos/site1.jpg</small></div></div>
+      <div class="gallery-item"><div class="gallery-placeholder"><span>📊</span>Data Analysis Session<br><small>Add: photos/lab2.jpg</small></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightboxImg" src="" alt="" />
+  <div class="lightbox-caption" id="lightboxCaption"></div>
+</div>
+
+<!-- ───────────── NEWS ───────────── -->
+<section id="news">
+  <div class="container">
+    <div class="section-eyebrow">Updates</div>
+    <h2 class="section-title">News &amp; Events</h2>
+    <div class="news-grid">
+
+      <div class="news-card">
+        <div class="news-thumb"></div>
+        <div class="news-body">
+          <div class="news-date">July 2026</div>
+          <div class="news-title">Congratulations to our PhD graduates</div>
+          <div class="news-desc">Debayan Mandal and Shruti Tripathi successfully completed their PhDs, capping years of research in the lab on indoor and organic aerosol chemistry. We wish them the very best in their next steps.</div>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <div class="news-thumb"></div>
+        <div class="news-body">
+          <div class="news-date">June 2026</div>
+          <div class="news-title">Lab members attend the PAVITRA Workshop at IIT Bombay</div>
+          <div class="news-desc">Lab members (Madhumita Mahant and Suzal) participated in the two-day workshop on data-driven solutions for air pollution management, centred on the PAVITRA (Pollution mAnagement and interVentIon Tool foR IndiA) platform, held in collaboration with CSTEP and UC Berkeley.</div>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <div class="news-thumb"></div>
+        <div class="news-body">
+          <div class="news-date">May 2026</div>
+          <div class="news-title">Research Intern presents at IRCC</div>
+          <div class="news-desc">Paripreet Kaur presented her project findings at IIT Bombay's Industrial Research and Consultancy Centre (IRCC), showcasing her work carried out during her internship with the lab.</div>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <div class="news-thumb"></div>
+        <div class="news-body">
+          <div class="news-date">January 2026</div>
+          <div class="news-title">Prof. Chakraborty features in an interview on atmospheric aerosol research</div>
+          <div class="news-desc">Our PI spoke about the cloud seeding technique, its short term impacts, air quality improvement needs and the broader challenge of characterising air pollution over India.</div>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <div class="news-thumb"></div>
+        <div class="news-body">
+          <div class="news-date">December 2025</div>
+          <div class="news-title">Lab represented at IICAQM</div>
+          <div class="news-desc">Member of the CAP Lab (Jayaraju Pakki) presented their research at the Indian International Conference on Air Quality Management (IICAQM) held at IIT Delhi, engaging with researchers and policymakers on air quality challenges across India.</div>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <div class="news-thumb"></div>
+        <div class="news-body">
+          <div class="news-date">December 2025</div>
+          <div class="news-title">Lab members present at the Asian Aerosol Conference</div>
+          <div class="news-desc">Our researchers shared recent findings on aerosol chemistry and formation processes with the broader Asian aerosol science community, exchanging ideas with leading groups in the region.</div>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <div class="news-thumb"></div>
+        <div class="news-body">
+          <div class="news-date">October 2024</div>
+          <div class="news-title">CAP Lab conducts a workshop on Secondary Organic Aerosol (SOA)</div>
+          <div class="news-desc">The lab organised and hosted a dedicated workshop on Secondary Organic Aerosol formation and chemistry, bringing together students and researchers to discuss formation pathways, measurement techniques, and modelling approaches.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── CONTACT ───────────── -->
+<section id="contact">
+  <div class="container">
+    <div class="section-eyebrow" style="color:#9FE1CB;">Get in Touch</div>
+    <h2 class="section-title">Contact Us</h2>
+    <p class="section-subtitle">We welcome enquiries from prospective students, collaborators, and the media.</p>
+    <div class="contact-grid">
+      <div>
+        <div class="contact-info-block">
+          <div class="contact-label">Address</div>
+          <div class="contact-value">
+            Chemistry of Atmospheric Pollutants Lab (CAP Lab)<br>
+            Room ES 408, ESED-DESE Building<br>
+            Environmental Science &amp; Engineering Department<br>
+            Indian Institute of Technology Bombay<br>
+            Powai, Mumbai, Maharashtra – 400076
+          </div>
+        </div>
+        <div class="contact-info-block">
+          <div class="contact-label">Lab Email</div>
+          <div class="contact-value"><a href="mailto:CAPs.IITB@gmail.com">CAPs.IITB@gmail.com</a></div>
+        </div>
+        <div class="contact-info-block">
+          <div class="contact-label">PI Email</div>
+          <div class="contact-value"><a href="mailto:abhishekc@iitb.ac.in">abhishekc@iitb.ac.in</a></div>
+        </div>
+        <div class="contact-info-block">
+          <div class="contact-label">Phone</div>
+          <div class="contact-value">+91-22-2576-5853</div>
+        </div>
+        <div class="contact-info-block">
+          <div class="contact-label">Office Hours</div>
+          <div class="contact-value">Monday – Friday, 10:00 am – 5:00 pm</div>
+        </div>
+        <div class="contact-info-block">
+          <div class="contact-label">LinkedIn</div>
+          <div class="contact-value">
+            <a href="https://www.linkedin.com/in/chemistry-of-atmospheric-pollutants-research-laboratory-1ab634397/" target="_blank">CAPS Research Laboratory</a>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form-area">
+        <div style="font-size:0.95rem; font-weight:600; color:#fff; margin-bottom:1.25rem;">Send a Message</div>
+        <!-- To make this form send real emails, replace the <form> tag with:
+             <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+             and remove the onsubmit attribute. Sign up free at formspree.io -->
+        <form onsubmit="event.preventDefault(); alert('Connect this form to Formspree.io to receive emails. See the comment in the HTML code.');">
+          <div class="form-row"><label>Name</label><input type="text" placeholder="Your full name" required /></div>
+          <div class="form-row"><label>Email</label><input type="email" placeholder="you@example.com" required /></div>
+          <div class="form-row"><label>Subject</label><input type="text" placeholder="e.g. PhD enquiry / Collaboration" /></div>
+          <div class="form-row"><label>Message</label><textarea placeholder="Write your message here…" required></textarea></div>
+          <button type="submit" class="form-submit">Send Message →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── FOOTER ───────────── -->
+<footer>
+  <p>© 2026 Chemistry of Atmospheric Pollutants Research Laboratory · IIT Bombay ·
+    <a href="mailto:CAPs.IITB@gmail.com">CAPs.IITB@gmail.com</a> ·
+    <a href="https://www.esed.iitb.ac.in/faculty/abhishek-chakraborty" target="_blank">Faculty Page</a>
+  </p>
+</footer>
+
+<script>
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+        document.getElementById('navLinks').classList.remove('open');
+      }
+    });
+  });
+
+  // Lightbox
+  function openLightbox(el) {
+    const img = el.querySelector('img');
+    if (!img) return;
+    document.getElementById('lightboxImg').src = img.src;
+    document.getElementById('lightboxCaption').textContent = img.dataset.caption || img.alt || '';
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
+</body>
+</html>
