@@ -294,21 +294,6 @@
   .team-name { font-size: 0.9rem; font-weight: 600; color: var(--slate); }
   .team-role { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
   .view-hint { font-size: 0.72rem; color: var(--teal); margin-top: 6px; font-weight: 600; }
-  .team-contact {
-    display: flex; justify-content: center; gap: 0.5rem;
-    margin-top: 0.6rem;
-  }
-  .team-contact a {
-    display: flex; align-items: center; justify-content: center;
-    width: 26px; height: 26px;
-    border-radius: 50%;
-    background: var(--teal-lt);
-    color: var(--teal-dk);
-    font-size: 0.78rem;
-    text-decoration: none;
-    transition: background 0.15s, transform 0.15s;
-  }
-  .team-contact a:hover { background: var(--teal); color: #fff; transform: translateY(-2px); }
 
   /* ─── PUBLICATIONS ─── */
   .pub-list { list-style: none; }
@@ -756,124 +741,250 @@
     <h2 class="section-title">People</h2>
     <p class="section-subtitle">Click any member's card to view their full profile, research interests, and publications.</p>
 
-    <!--
-      HOW TO ADD AN EMAIL / LINKEDIN FOR SOMEONE:
-      Find their entry in the TEAM_DATA table below (in the JS block near the
-      bottom of this section) and fill in the "email" and/or "linkedin" fields, e.g.:
+    <!-- ── PhD Students ── -->
+    <div class="team-section-label">PhD Students</div>
+    <div class="team-grid" style="margin-bottom:2rem;">
 
-        { name: "Suzal", role: "PhD Student · 2026–Present", photo: "Suzal.jpeg",
-          email: "suzal@iitb.ac.in", linkedin: "https://linkedin.com/in/suzal" }
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Sathish-Yasarapu.jpeg" alt="Sathish Yasarapu"
+               onerror="this.style.display='none';this.parentElement.textContent='SY';" />
+        </div>
+        <div class="team-name">Sathish Yasarapu</div>
+        <div class="team-role">PhD Student · 2022–Present</div>
+      </div>
 
-      Leave a field as "" (empty string) to hide that icon for that person.
-      Photos still need real image files in the photos/ folder — see README.md.
-    -->
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Vidit-Parkar.jpeg" alt="Vidit Parkar"
+               onerror="this.style.display='none';this.parentElement.textContent='VP';" />
+        </div>
+        <div class="team-name">Vidit Parkar</div>
+        <div class="team-role">PhD Student · 2023–Present</div>
+      </div>
 
-    <div id="phdStudents" class="team-section-label" style="display:none;">PhD Students</div>
-    <div id="phdGrid" class="team-grid" style="margin-bottom:2rem;"></div>
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Jayaraju-Pakki.jpeg" alt="Jayaraju Pakki"
+               onerror="this.style.display='none';this.parentElement.textContent='JP';" />
+        </div>
+        <div class="team-name">Jayaraju Pakki</div>
+        <div class="team-role">PhD Student · 2023–Present</div>
+      </div>
 
-    <div id="staffLabel" class="team-section-label" style="display:none;">Project Staff &amp; Postdocs</div>
-    <div id="staffGrid" class="team-grid" style="margin-bottom:2rem;"></div>
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Megha-Anand.jpeg" alt="Megha Anand"
+               onerror="this.style.display='none';this.parentElement.textContent='MA';" />
+        </div>
+        <div class="team-name">Megha Anand</div>
+        <div class="team-role">PhD Student · 2024–Present</div>
+      </div>
 
-    <div id="mastersLabel" class="team-section-label" style="display:none;">Master's Students</div>
-    <div id="mastersGrid" class="team-grid" style="margin-bottom:2rem;"></div>
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Diyalakshmi.jpeg" alt="Moirangthem Diyalakshmi Devi"
+               onerror="this.style.display='none';this.parentElement.textContent='MD';" />
+        </div>
+        <div class="team-name">Moirangthem Diyalakshmi Devi</div>
+        <div class="team-role">PhD Student · 2024–Present</div>
+      </div>
 
-    <div id="dualLabel" class="team-section-label" style="display:none;">Dual Degree Students</div>
-    <div id="dualGrid" class="team-grid" style="margin-bottom:2rem;"></div>
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Madhumita-Mahant.jpg" alt="Madhumita Mahant"
+               onerror="this.style.display='none';this.parentElement.textContent='MM';" />
+        </div>
+        <div class="team-name">Madhumita Mahant</div>
+        <div class="team-role">PhD Student · 2025–Present</div>
+      </div>
 
-    <div id="internsLabel" class="team-section-label" style="display:none;">Research Interns</div>
-    <div id="internsGrid" class="team-grid" style="margin-bottom:2rem;"></div>
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Pranjal-Pandey.jpg" alt="Pranjal Pandey"
+               onerror="this.style.display='none';this.parentElement.textContent='PP';" />
+        </div>
+        <div class="team-name">Pranjal Pandey</div>
+        <div class="team-role">PhD Student · 2025–Present</div>
+      </div>
 
-    <div id="alumniLabel" class="team-section-label" style="display:none;">Lab Alumni</div>
-    <div id="alumniGrid" class="team-grid" style="margin-bottom:2rem;"></div>
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Aditi-Das.jpg" alt="Aditi Das"
+               onerror="this.style.display='none';this.parentElement.textContent='AD';" />
+        </div>
+        <div class="team-name">Aditi Das</div>
+        <div class="team-role">PhD Student · 2026–Present</div>
+      </div>
 
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Suzal.jpeg" alt="Suzal"
+               onerror="this.style.display='none';this.parentElement.textContent='SZ';" />
+        </div>
+        <div class="team-name">Suzal</div>
+        <div class="team-role">PhD Student · 2026–Present</div>
+      </div>
+
+    </div>
+
+    <!-- ── Project Staff & Postdocs ── -->
+    <div class="team-section-label">Project Staff &amp; Postdocs</div>
+    <div class="team-grid" style="margin-bottom:2rem;">
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Satya-Sahu.jpeg" alt="Satya Sahu"
+               onerror="this.style.display='none';this.parentElement.textContent='SS';" />
+        </div>
+        <div class="team-name">Satya Sahu</div>
+        <div class="team-role">Project Staff</div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Samrat-Santra.jpeg" alt="Samrat Santra"
+               onerror="this.style.display='none';this.parentElement.textContent='SS';" />
+        </div>
+        <div class="team-name">Dr. Samrat Santra</div>
+        <div class="team-role">Postdoctoral Researcher</div>
+      </div>
+
+    </div>
+
+    <!-- ── Master's Students ── -->
+    <div class="team-section-label">Master's Students</div>
+    <div class="team-grid" style="margin-bottom:2rem;">
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Swati-Ray.jpg" alt="Swati Ray"
+               onerror="this.style.display='none';this.parentElement.textContent='SR';" />
+        </div>
+        <div class="team-name">Swati Ray</div>
+        <div class="team-role">M.Tech Student</div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Anjana-Ap.jpeg" alt="Anjana Ap"
+               onerror="this.style.display='none';this.parentElement.textContent='AA';" />
+        </div>
+        <div class="team-name">Anjana Ap</div>
+        <div class="team-role">M.Sc.-PhD Student</div>
+      </div>
+
+    </div>
+
+    <!-- ── Dual Degree Students ── -->
+    <div class="team-section-label">Dual Degree Students</div>
+    <div class="team-grid" style="margin-bottom:2rem;">
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Rishi-Bhande.jpg" alt="Rishi Bhande"
+               onerror="this.style.display='none';this.parentElement.textContent='RB';" />
+        </div>
+        <div class="team-name">Rishi Bhande</div>
+        <div class="team-role">Dual Degree (B.Tech. + M.Tech.) Student</div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Utprabh-Pama.png" alt="Utprabh Pama"
+               onerror="this.style.display='none';this.parentElement.textContent='UP';" />
+        </div>
+        <div class="team-name">Utprabh Pama</div>
+        <div class="team-role">Dual Degree (B.Tech. + M.Tech.) Student</div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Vaibhav-Chand.jpeg" alt="Vaibhav Chand"
+               onerror="this.style.display='none';this.parentElement.textContent='VC';" />
+        </div>
+        <div class="team-name">Vaibhav Chand</div>
+        <div class="team-role">Dual Degree (B.Tech. + M.Tech.) Student</div>
+      </div>
+
+    </div>
+
+    <!-- ── Research Interns ── -->
+    <div class="team-section-label">Research Interns</div>
+    <div class="team-grid" style="margin-bottom:2rem;">
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Paripreet-Kaur.jpeg" alt="Paripreet Kaur"
+               onerror="this.style.display='none';this.parentElement.textContent='PK';" />
+        </div>
+        <div class="team-name">Paripreet Kaur</div>
+        <div class="team-role">Research Intern</div>
+      </div>
+
+    </div>
+
+    <!-- ── Alumni ── -->
+    <div class="team-section-label">Lab Alumni</div>
+    <div class="team-grid" style="margin-bottom:2rem;">
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Debayan-Mandal.jpeg" alt="Debayan Mandal"
+               onerror="this.style.display='none';this.parentElement.textContent='DM';" />
+        </div>
+        <div class="team-name">Debayan Mandal</div>
+        <div class="team-role">PhD Student · 2019–2026</div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Shruti-Tripathi.jpg" alt="Shruti Tripathi"
+               onerror="this.style.display='none';this.parentElement.textContent='ST';" />
+        </div>
+        <div class="team-name">Shruti Tripathi</div>
+        <div class="team-role">PhD Student · 2019–2026</div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Senthil-Vikram-Vodapalli.jpeg" alt="Senthil Vikram Vodapalli"
+               onerror="this.style.display='none';this.parentElement.textContent='SV';" />
+        </div>
+        <div class="team-name">Senthil Vikram Vodapalli</div>
+        <div class="team-role">Dual Degree · 2018–2023</div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Prathmesh-Namdeo.jpeg" alt="Prathmesh Namdeo"
+               onerror="this.style.display='none';this.parentElement.textContent='PN';" />
+        </div>
+        <div class="team-name">Prathmesh Namdeo</div>
+        <div class="team-role">Dual Degree · 2019–2024</div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Tushar-Singh.jpeg" alt="Tushar Singh"
+               onerror="this.style.display='none';this.parentElement.textContent='TS';" />
+        </div>
+        <div class="team-name">Tushar Singh</div>
+        <div class="team-role">M.Tech Student · 2024–2026</div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="photos/Siddhi-Pallod.webp" alt="Siddhi Pallod"
+               onerror="this.style.display='none';this.parentElement.textContent='SP';" />
+        </div>
+        <div class="team-name">Siddhi Pallod</div>
+        <div class="team-role">Dual Degree · 2021–2026</div>
+      </div>
+
+    </div>
   </div>
 </section>
-
-<script>
-  // ─── TEAM DATA ───
-  // Fill in "email" and "linkedin" for anyone whose card should show those
-  // icons. Leave as "" to hide the icon. Photos come from the photos/ folder
-  // (filenames are case-sensitive and must match exactly).
-  const TEAM_DATA = {
-    phdGrid: [
-      { name: "Sathish Yasarapu", role: "PhD Student · 2022–Present", photo: "Sathish-Yasarapu.jpeg", email: "sathish44@iitb.ac.in", linkedin: "https://www.linkedin.com/in/sathish-yasarapu-b8b306202/" },
-      { name: "Vidit Parkar", role: "PhD Student · 2023–Present", photo: "Vidit-Parkar.jpeg", email: "", linkedin: "" },
-      { name: "Jayaraju Pakki", role: "PhD Student · 2023–Present", photo: "Jayaraju-Pakki.jpeg", email: "", linkedin: "" },
-      { name: "Megha Anand", role: "PhD Student · 2024–Present", photo: "Megha-Anand.jpeg", email: "", linkedin: "" },
-      { name: "Moirangthem Diyalakshmi Devi", role: "PhD Student · 2024–Present", photo: "Diyalakshmi.jpeg", email: "", linkedin: "" },
-      { name: "Madhumita Mahant", role: "PhD Student · 2025–Present", photo: "Madhumita-Mahant.jpg", email: "", linkedin: "" },
-      { name: "Pranjal Pandey", role: "PhD Student · 2025–Present", photo: "Pranjal-Pandey.jpg", email: "", linkedin: "" },
-      { name: "Aditi Das", role: "PhD Student · 2026–Present", photo: "Aditi-Das.jpg", email: "", linkedin: "" },
-      { name: "Suzal", role: "PhD Student · 2026–Present", photo: "Suzal.jpeg", email: "", linkedin: "" }
-    ],
-    staffGrid: [
-      { name: "Satya Sahu", role: "Project Staff", photo: "Satya-Sahu.jpeg", email: "", linkedin: "" },
-      { name: "Dr. Samrat Santra", role: "Postdoctoral Researcher", photo: "Samrat-Santra.jpeg", email: "", linkedin: "" }
-    ],
-    mastersGrid: [
-      { name: "Swati Ray", role: "M.Tech Student", photo: "Swati-Ray.jpg", email: "", linkedin: "" },
-      { name: "Anjana Ap", role: "M.Sc.-PhD Student", photo: "Anjana-Ap.jpeg", email: "", linkedin: "" }
-    ],
-    dualGrid: [
-      { name: "Rishi Bhande", role: "Dual Degree (B.Tech. + M.Tech.) Student", photo: "Rishi-Bhande.jpg", email: "", linkedin: "" },
-      { name: "Utprabh Pama", role: "Dual Degree (B.Tech. + M.Tech.) Student", photo: "Utprabh-Pama.png", email: "", linkedin: "" },
-      { name: "Vaibhav Chand", role: "Dual Degree (B.Tech. + M.Tech.) Student", photo: "Vaibhav-Chand.jpeg", email: "", linkedin: "" }
-    ],
-    internsGrid: [
-      { name: "Paripreet Kaur", role: "Research Intern", photo: "Paripreet-Kaur.jpeg", email: "", linkedin: "" }
-    ],
-    alumniGrid: [
-      { name: "Debayan Mandal", role: "PhD Student · 2019–2026", photo: "Debayan-Mandal.jpeg", email: "", linkedin: "" },
-      { name: "Shruti Tripathi", role: "PhD Student · 2019–2026", photo: "Shruti-Tripathi.jpg", email: "", linkedin: "" },
-      { name: "Senthil Vikram Vodapalli", role: "Dual Degree · 2018–2023", photo: "Senthil-Vikram-Vodapalli.jpeg", email: "", linkedin: "" },
-      { name: "Prathmesh Namdeo", role: "Dual Degree · 2019–2024", photo: "Prathmesh-Namdeo.jpeg", email: "", linkedin: "" },
-      { name: "Tushar Singh", role: "M.Tech Student · 2024–2026", photo: "Tushar-Singh.jpeg", email: "", linkedin: "" },
-      { name: "Siddhi Pallod", role: "Dual Degree · 2021–2026", photo: "Siddhi-Pallod.webp", email: "", linkedin: "" }
-    ]
-  };
-
-  function initials(name) {
-    return name.replace(/^Dr\.\s*/, '').split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase();
-  }
-
-  function renderTeamCard(person) {
-    const card = document.createElement('div');
-    card.className = 'team-card';
-
-    let contactHtml = '';
-    if (person.email || person.linkedin) {
-      contactHtml += '<div class="team-contact" onclick="event.stopPropagation()">';
-      if (person.email) {
-        contactHtml += `<a href="mailto:${person.email}" title="Email ${person.name}" aria-label="Email">✉️</a>`;
-      }
-      if (person.linkedin) {
-        contactHtml += `<a href="${person.linkedin}" target="_blank" rel="noopener" title="${person.name} on LinkedIn" aria-label="LinkedIn">in</a>`;
-      }
-      contactHtml += '</div>';
-    }
-
-    card.innerHTML = `
-      <div class="team-avatar">
-        <img src="photos/${person.photo}" alt="${person.name}"
-             onerror="this.style.display='none';this.parentElement.textContent='${initials(person.name)}';" />
-      </div>
-      <div class="team-name">${person.name}</div>
-      <div class="team-role">${person.role}</div>
-      ${contactHtml}
-    `;
-    return card;
-  }
-
-  Object.keys(TEAM_DATA).forEach(gridId => {
-    const grid = document.getElementById(gridId);
-    const people = TEAM_DATA[gridId];
-    if (!grid || !people.length) return;
-    people.forEach(person => grid.appendChild(renderTeamCard(person)));
-    const labelId = gridId.replace('Grid', gridId === 'phdGrid' ? 'Students' : 'Label');
-    const label = document.getElementById(labelId);
-    if (label) label.style.display = 'block';
-  });
-</script>
 
 <!-- ───────────── PUBLICATIONS ───────────── -->
 <section id="publications" style="background:var(--bg2);">
