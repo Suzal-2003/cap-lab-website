@@ -435,6 +435,42 @@
   }
   footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
 
+
+  /* ─── TEAM CONTACT DETAILS ─── */
+  .team-card { position: relative; }
+  .team-card .team-avatar {
+    width: 96px; height: 96px; min-width: 96px; min-height: 96px;
+    border: 3px solid var(--teal-lt); background: #eef8f4;
+  }
+  .team-avatar img {
+    width: 100%; height: 100%; object-fit: cover; object-position: center;
+    display: block;
+  }
+  .team-contact {
+    display: flex; justify-content: center; flex-wrap: wrap;
+    gap: 0.35rem; margin-top: 0.7rem;
+  }
+  .team-contact a, .team-contact span {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 28px; padding: 0.25rem 0.55rem;
+    border: 1px solid var(--border); border-radius: 999px;
+    color: var(--teal-dk); background: var(--bg);
+    font-size: 0.7rem; font-weight: 600; text-decoration: none;
+    transition: all 0.15s ease;
+  }
+  .team-contact a:hover {
+    background: var(--teal-lt); border-color: #b7e7d6;
+    transform: translateY(-1px);
+  }
+  .team-contact .missing { color: var(--muted); cursor: default; }
+  .team-card .team-name { margin-top: 0.2rem; }
+  .photo-fallback {
+    display: flex !important; align-items: center; justify-content: center;
+    width: 100%; height: 100%; background: linear-gradient(135deg, var(--teal-lt), #f5fbf8);
+    color: var(--teal-dk); font-weight: 700; font-size: 1.05rem; text-align: center;
+    padding: 0.5rem;
+  }
+
   /* ─── MOBILE ─── */
   @media (max-width: 768px) {
     .nav-links { display: none; flex-direction: column; }
@@ -586,9 +622,9 @@
           overflow:hidden; flex-shrink:0;
         ">
           <!-- EDIT: Replace with real photo:
-               <img src="photos/pi.jpg" alt="Prof. Abhishek Chakraborty"
+               <img src="./photos/pi.jpg" alt="Prof. Abhishek Chakraborty"
                     style="width:100%;height:100%;object-fit:cover;" /> -->
-          <img src="photos/Abhishek-Chakraborty.jpeg"
+          <img src="./photos/Abhishek-Chakraborty.jpeg" loading="lazy"
      alt="Prof. Abhishek Chakraborty"
      style="width:100%;height:100%;object-fit:cover;"
      onerror="this.style.display='none';this.parentElement.textContent='AC';" />
@@ -739,249 +775,314 @@
   <div class="container">
     <div class="section-eyebrow">The Team</div>
     <h2 class="section-title">People</h2>
-    <p class="section-subtitle">Click any member's card to view their full profile, research interests, and publications.</p>
+    <p class="section-subtitle">
+      Meet our researchers, students, project staff, and alumni. Each team card includes a profile photo,
+      email contact, and LinkedIn profile where available.
+    </p>
 
-    <!-- ── PhD Students ── -->
     <div class="team-section-label">PhD Students</div>
     <div class="team-grid" style="margin-bottom:2rem;">
-
       <div class="team-card">
         <div class="team-avatar">
-          <img src="photos/Sathish-Yasarapu.heic" alt="Sathish Yasarapu"
-               onerror="this.style.display='none';this.parentElement.textContent='SY';" />
+          <img src="./photos/Sathish-Yasarapu.jpg" alt="Sathish Yasarapu" loading="lazy"
+               onerror="showImageFallback(this,'','SY')">
         </div>
         <div class="team-name">Sathish Yasarapu</div>
         <div class="team-role">PhD Student · 2022–Present</div>
+        <div class="team-contact">
+          <a href="mailto:ADD_EMAIL" title="Email">📧 Email</a>
+          <a href="https://in.linkedin.com/in/sathish-yasarapu-b8b306202" target="_blank" rel="noopener" title="LinkedIn">in LinkedIn</a>
+        </div>
       </div>
-
       <div class="team-card">
         <div class="team-avatar">
-          <img src="photos/Vidit-Parkar.jpeg" alt="Vidit Parkar"
-               onerror="this.style.display='none';this.parentElement.textContent='VP';" />
+          <img src="./photos/Vidit-Parkar.jpeg" alt="Vidit Parkar" loading="lazy"
+               onerror="showImageFallback(this,'','VP')">
         </div>
         <div class="team-name">Vidit Parkar</div>
         <div class="team-role">PhD Student · 2023–Present</div>
+        <div class="team-contact">
+          <a href="mailto:ADD_EMAIL" title="Email">📧 Email</a>
+          <a href="https://in.linkedin.com/in/vidit-parkar-6b50b1221" target="_blank" rel="noopener" title="LinkedIn">in LinkedIn</a>
+        </div>
       </div>
-
       <div class="team-card">
         <div class="team-avatar">
-          <img src="photos/Jayaraju-Pakki.jpeg" alt="Jayaraju Pakki"
-               onerror="this.style.display='none';this.parentElement.textContent='JP';" />
+          <img src="./photos/Jayaraju-Pakki.jpeg" alt="Jayaraju Pakki" loading="lazy"
+               onerror="showImageFallback(this,'','JP')">
         </div>
         <div class="team-name">Jayaraju Pakki</div>
         <div class="team-role">PhD Student · 2023–Present</div>
+        <div class="team-contact">
+          <a href="mailto:ADD_EMAIL" title="Email">📧 Email</a>
+          <a href="https://in.linkedin.com/in/jayaraju-pakki-536854140" target="_blank" rel="noopener" title="LinkedIn">in LinkedIn</a>
+        </div>
       </div>
-
       <div class="team-card">
         <div class="team-avatar">
-          <img src="photos/Megha-Anand.jpeg" alt="Megha Anand"
-               onerror="this.style.display='none';this.parentElement.textContent='MA';" />
+          <img src="./photos/Megha-Anand.jpeg" alt="Megha Anand" loading="lazy"
+               onerror="showImageFallback(this,'','MA')">
         </div>
         <div class="team-name">Megha Anand</div>
         <div class="team-role">PhD Student · 2024–Present</div>
+        <div class="team-contact">
+          <a href="mailto:ADD_EMAIL" title="Email">📧 Email</a>
+          <span class="missing">LinkedIn</span>
+        </div>
       </div>
-
       <div class="team-card">
         <div class="team-avatar">
-          <img src="photos/Diyalakshmi.jpeg" alt="Moirangthem Diyalakshmi Devi"
-               onerror="this.style.display='none';this.parentElement.textContent='MD';" />
+          <img src="./photos/Diyalakshmi.jpeg" alt="Moirangthem Diyalakshmi Devi" loading="lazy"
+               onerror="showImageFallback(this,'','MD')">
         </div>
         <div class="team-name">Moirangthem Diyalakshmi Devi</div>
         <div class="team-role">PhD Student · 2024–Present</div>
+        <div class="team-contact">
+          <a href="mailto:ADD_EMAIL" title="Email">📧 Email</a>
+          <span class="missing">LinkedIn</span>
+        </div>
       </div>
-
       <div class="team-card">
         <div class="team-avatar">
-          <img src="photos/Madhumita-Mahant.jpg" alt="Madhumita Mahant"
-               onerror="this.style.display='none';this.parentElement.textContent='MM';" />
+          <img src="./photos/Madhumita-Mahant.jpg" alt="Madhumita Mahant" loading="lazy"
+               onerror="showImageFallback(this,'','MM')">
         </div>
         <div class="team-name">Madhumita Mahant</div>
         <div class="team-role">PhD Student · 2025–Present</div>
+        <div class="team-contact">
+          <a href="mailto:ADD_EMAIL" title="Email">📧 Email</a>
+          <span class="missing">LinkedIn</span>
+        </div>
       </div>
-
       <div class="team-card">
         <div class="team-avatar">
-          <img src="photos/Pranjal-Pandey.jpg" alt="Pranjal Pandey"
-               onerror="this.style.display='none';this.parentElement.textContent='PP';" />
+          <img src="./photos/Pranjal-Pandey.jpg" alt="Pranjal Pandey" loading="lazy"
+               onerror="showImageFallback(this,'','PP')">
         </div>
         <div class="team-name">Pranjal Pandey</div>
         <div class="team-role">PhD Student · 2025–Present</div>
+        <div class="team-contact">
+          <a href="mailto:ADD_EMAIL" title="Email">📧 Email</a>
+          <span class="missing">LinkedIn</span>
+        </div>
       </div>
-
       <div class="team-card">
         <div class="team-avatar">
-          <img src="photos/Aditi-Das.jpg" alt="Aditi Das"
-               onerror="this.style.display='none';this.parentElement.textContent='AD';" />
+          <img src="./photos/Aditi-Das.jpg" alt="Aditi Das" loading="lazy"
+               onerror="showImageFallback(this,'','AD')">
         </div>
         <div class="team-name">Aditi Das</div>
         <div class="team-role">PhD Student · 2026–Present</div>
+        <div class="team-contact">
+          <a href="mailto:ADD_EMAIL" title="Email">📧 Email</a>
+          <a href="https://in.linkedin.com/in/aditi-das-844043297" target="_blank" rel="noopener" title="LinkedIn">in LinkedIn</a>
+        </div>
       </div>
-
       <div class="team-card">
         <div class="team-avatar">
-          <img src="photos/Suzal.jpeg" alt="Suzal"
-               onerror="this.style.display='none';this.parentElement.textContent='SZ';" />
+          <img src="./photos/Suzal.jpeg" alt="Suzal" loading="lazy"
+               onerror="showImageFallback(this,'','SZ')">
         </div>
         <div class="team-name">Suzal</div>
         <div class="team-role">PhD Student · 2026–Present</div>
+        <div class="team-contact">
+          <a href="mailto:ADD_EMAIL" title="Email">📧 Email</a>
+          <span class="missing">LinkedIn</span>
+        </div>
       </div>
-
     </div>
 
-    <!-- ── Project Staff & Postdocs ── -->
     <div class="team-section-label">Project Staff &amp; Postdocs</div>
     <div class="team-grid" style="margin-bottom:2rem;">
-
       <div class="team-card">
         <div class="team-avatar">
-          <img src="photos/Satya-Sahu.jpeg" alt="Satya Sahu"
-               onerror="this.style.display='none';this.parentElement.textContent='SS';" />
+          <img src="./photos/Satya-Sahu.jpeg" alt="Satya Sahu" loading="lazy"
+               onerror="showImageFallback(this,'','SS')">
         </div>
         <div class="team-name">Satya Sahu</div>
         <div class="team-role">Project Staff</div>
+        <div class="team-contact">
+          <a href="mailto:ADD_EMAIL" title="Email">📧 Email</a>
+          <span class="missing">LinkedIn</span>
+        </div>
       </div>
-
       <div class="team-card">
         <div class="team-avatar">
-          <img src="photos/Samrat-Santra.jpeg" alt="Samrat Santra"
-               onerror="this.style.display='none';this.parentElement.textContent='SS';" />
+          <img src="./photos/Samrat-Santra.jpeg" alt="Dr. Samrat Santra" loading="lazy"
+               onerror="showImageFallback(this,'','SS')">
         </div>
         <div class="team-name">Dr. Samrat Santra</div>
         <div class="team-role">Postdoctoral Researcher</div>
+        <div class="team-contact">
+          <a href="mailto:ADD_EMAIL" title="Email">📧 Email</a>
+          <span class="missing">LinkedIn</span>
+        </div>
       </div>
-
     </div>
 
-    <!-- ── Master's Students ── -->
     <div class="team-section-label">Master's Students</div>
     <div class="team-grid" style="margin-bottom:2rem;">
-
       <div class="team-card">
         <div class="team-avatar">
-          <img src="photos/Swati-Ray.jpg" alt="Swati Ray"
-               onerror="this.style.display='none';this.parentElement.textContent='SR';" />
+          <img src="./photos/Swati-Ray.jpg" alt="Swati Ray" loading="lazy"
+               onerror="showImageFallback(this,'','SR')">
         </div>
         <div class="team-name">Swati Ray</div>
         <div class="team-role">M.Tech Student</div>
+        <div class="team-contact">
+          <a href="mailto:ADD_EMAIL" title="Email">📧 Email</a>
+          <span class="missing">LinkedIn</span>
+        </div>
       </div>
-
       <div class="team-card">
         <div class="team-avatar">
-          <img src="photos/Anjana-Ap.jpeg" alt="Anjana Ap"
-               onerror="this.style.display='none';this.parentElement.textContent='AA';" />
+          <img src="./photos/Anjana-Ap.jpeg" alt="Anjana Ap" loading="lazy"
+               onerror="showImageFallback(this,'','AA')">
         </div>
         <div class="team-name">Anjana Ap</div>
         <div class="team-role">M.Sc.-PhD Student</div>
+        <div class="team-contact">
+          <a href="mailto:ADD_EMAIL" title="Email">📧 Email</a>
+          <span class="missing">LinkedIn</span>
+        </div>
       </div>
-
     </div>
 
-    <!-- ── Dual Degree Students ── -->
     <div class="team-section-label">Dual Degree Students</div>
     <div class="team-grid" style="margin-bottom:2rem;">
-
       <div class="team-card">
         <div class="team-avatar">
-          <img src="photos/Rishi-Bhande.jpg" alt="Rishi Bhande"
-               onerror="this.style.display='none';this.parentElement.textContent='RB';" />
+          <img src="./photos/Rishi-Bhande.jpg" alt="Rishi Bhande" loading="lazy"
+               onerror="showImageFallback(this,'','RB')">
         </div>
         <div class="team-name">Rishi Bhande</div>
         <div class="team-role">Dual Degree (B.Tech. + M.Tech.) Student</div>
+        <div class="team-contact">
+          <a href="mailto:ADD_EMAIL" title="Email">📧 Email</a>
+          <span class="missing">LinkedIn</span>
+        </div>
       </div>
-
       <div class="team-card">
         <div class="team-avatar">
-          <img src="photos/Utprabh-Pama.png" alt="Utprabh Pama"
-               onerror="this.style.display='none';this.parentElement.textContent='UP';" />
+          <img src="./photos/Utprabh-Pama.png" alt="Utprabh Pama" loading="lazy"
+               onerror="showImageFallback(this,'','UP')">
         </div>
         <div class="team-name">Utprabh Pama</div>
         <div class="team-role">Dual Degree (B.Tech. + M.Tech.) Student</div>
+        <div class="team-contact">
+          <a href="mailto:ADD_EMAIL" title="Email">📧 Email</a>
+          <span class="missing">LinkedIn</span>
+        </div>
       </div>
-
       <div class="team-card">
         <div class="team-avatar">
-          <img src="photos/Vaibhav-Chand.jpeg" alt="Vaibhav Chand"
-               onerror="this.style.display='none';this.parentElement.textContent='VC';" />
+          <img src="./photos/Vaibhav-Chand.jpeg" alt="Vaibhav Chand" loading="lazy"
+               onerror="showImageFallback(this,'','VC')">
         </div>
         <div class="team-name">Vaibhav Chand</div>
         <div class="team-role">Dual Degree (B.Tech. + M.Tech.) Student</div>
+        <div class="team-contact">
+          <a href="mailto:ADD_EMAIL" title="Email">📧 Email</a>
+          <span class="missing">LinkedIn</span>
+        </div>
       </div>
-
     </div>
 
-    <!-- ── Research Interns ── -->
     <div class="team-section-label">Research Interns</div>
     <div class="team-grid" style="margin-bottom:2rem;">
-
       <div class="team-card">
         <div class="team-avatar">
-          <img src="photos/Paripreet-Kaur.jpeg" alt="Paripreet Kaur"
-               onerror="this.style.display='none';this.parentElement.textContent='PK';" />
+          <img src="./photos/Paripreet-Kaur.jpeg" alt="Paripreet Kaur" loading="lazy"
+               onerror="showImageFallback(this,'','PK')">
         </div>
         <div class="team-name">Paripreet Kaur</div>
         <div class="team-role">Research Intern</div>
+        <div class="team-contact">
+          <a href="mailto:ADD_EMAIL" title="Email">📧 Email</a>
+          <span class="missing">LinkedIn</span>
+        </div>
       </div>
-
     </div>
 
-    <!-- ── Alumni ── -->
     <div class="team-section-label">Lab Alumni</div>
     <div class="team-grid" style="margin-bottom:2rem;">
-
       <div class="team-card">
         <div class="team-avatar">
-          <img src="photos/Debayan-Mandal.jpeg" alt="Debayan Mandal"
-               onerror="this.style.display='none';this.parentElement.textContent='DM';" />
+          <img src="./photos/Debayan-Mandal.jpeg" alt="Debayan Mandal" loading="lazy"
+               onerror="showImageFallback(this,'','DM')">
         </div>
         <div class="team-name">Debayan Mandal</div>
         <div class="team-role">PhD Student · 2019–2026</div>
+        <div class="team-contact">
+          <a href="mailto:ADD_EMAIL" title="Email">📧 Email</a>
+          <span class="missing">LinkedIn</span>
+        </div>
       </div>
-
       <div class="team-card">
         <div class="team-avatar">
-          <img src="photos/Shruti-Tripathi.jpg" alt="Shruti Tripathi"
-               onerror="this.style.display='none';this.parentElement.textContent='ST';" />
+          <img src="./photos/Shruti-Tripathi.jpg" alt="Shruti Tripathi" loading="lazy"
+               onerror="showImageFallback(this,'','ST')">
         </div>
         <div class="team-name">Shruti Tripathi</div>
         <div class="team-role">PhD Student · 2019–2026</div>
+        <div class="team-contact">
+          <a href="mailto:ADD_EMAIL" title="Email">📧 Email</a>
+          <span class="missing">LinkedIn</span>
+        </div>
       </div>
-
       <div class="team-card">
         <div class="team-avatar">
-          <img src="photos/Senthil-Vikram-Vodapalli.jpeg" alt="Senthil Vikram Vodapalli"
-               onerror="this.style.display='none';this.parentElement.textContent='SV';" />
+          <img src="./photos/Senthil-Vikram-Vodapalli.jpeg" alt="Senthil Vikram Vodapalli" loading="lazy"
+               onerror="showImageFallback(this,'','SV')">
         </div>
         <div class="team-name">Senthil Vikram Vodapalli</div>
         <div class="team-role">Dual Degree · 2018–2023</div>
+        <div class="team-contact">
+          <a href="mailto:ADD_EMAIL" title="Email">📧 Email</a>
+          <span class="missing">LinkedIn</span>
+        </div>
       </div>
-
       <div class="team-card">
         <div class="team-avatar">
-          <img src="photos/Prathmesh-Namdeo.jpeg" alt="Prathmesh Namdeo"
-               onerror="this.style.display='none';this.parentElement.textContent='PN';" />
+          <img src="./photos/Prathmesh-Namdeo.jpeg" alt="Prathmesh Namdeo" loading="lazy"
+               onerror="showImageFallback(this,'','PN')">
         </div>
         <div class="team-name">Prathmesh Namdeo</div>
         <div class="team-role">Dual Degree · 2019–2024</div>
+        <div class="team-contact">
+          <a href="mailto:ADD_EMAIL" title="Email">📧 Email</a>
+          <span class="missing">LinkedIn</span>
+        </div>
       </div>
-
       <div class="team-card">
         <div class="team-avatar">
-          <img src="photos/Tushar-Singh.jpeg" alt="Tushar Singh"
-               onerror="this.style.display='none';this.parentElement.textContent='TS';" />
+          <img src="./photos/Tushar-Singh.jpeg" alt="Tushar Singh" loading="lazy"
+               onerror="showImageFallback(this,'','TS')">
         </div>
         <div class="team-name">Tushar Singh</div>
         <div class="team-role">M.Tech Student · 2024–2026</div>
+        <div class="team-contact">
+          <a href="mailto:ADD_EMAIL" title="Email">📧 Email</a>
+          <span class="missing">LinkedIn</span>
+        </div>
       </div>
-
       <div class="team-card">
         <div class="team-avatar">
-          <img src="photos/Siddhi-Pallod.webp" alt="Siddhi Pallod"
-               onerror="this.style.display='none';this.parentElement.textContent='SP';" />
+          <img src="./photos/Siddhi-Pallod.webp" alt="Siddhi Pallod" loading="lazy"
+               onerror="showImageFallback(this,'','SP')">
         </div>
         <div class="team-name">Siddhi Pallod</div>
         <div class="team-role">Dual Degree · 2021–2026</div>
+        <div class="team-contact">
+          <a href="mailto:ADD_EMAIL" title="Email">📧 Email</a>
+          <span class="missing">LinkedIn</span>
+        </div>
       </div>
+    </div>
 
+    <div style="margin-top:1rem; padding:1rem 1.25rem; background:var(--teal-lt); border-radius:10px; color:var(--teal-dk); font-size:0.82rem;">
+      <strong>Contact details:</strong> Replace each <code>ADD_EMAIL</code> with the member's official email address.
+      LinkedIn links are included where a public profile was verified; add the remaining profile URLs when available.
     </div>
   </div>
 </section>
@@ -1117,27 +1218,39 @@
     <h2 class="section-title">Gallery</h2>
     <p class="section-subtitle">A glimpse into our lab, fieldwork, and team events.</p>
     <div class="gallery-grid" id="galleryGrid">
-      <!--
-        HOW TO ADD PHOTOS:
-        1. Put your .jpg/.png photos in a folder called "photos/" next to index.html
-        2. For each photo, copy this block and update src and caption:
-
-        <div class="gallery-item" onclick="openLightbox(this)">
-          <img src="photos/your-photo.jpg" alt="Caption" data-caption="Caption text shown in lightbox" />
-          <div class="gallery-caption">Caption text</div>
-        </div>
-
-        Delete the placeholder tiles below once you add real photos.
-      -->
-      <div class="gallery-item"><div class="gallery-placeholder"><span>🔬</span>Lab Instrument Photo<br><small>Add: photos/lab1.jpg</small></div></div>
-      <div class="gallery-item"><div class="gallery-placeholder"><span>🌫️</span>Field Sampling Campaign<br><small>Add: photos/field1.jpg</small></div></div>
-      <div class="gallery-item"><div class="gallery-placeholder"><span>👩‍🔬</span>Team Photo<br><small>Add: photos/team1.jpg</small></div></div>
-      <div class="gallery-item"><div class="gallery-placeholder"><span>🏆</span>Award / Conference<br><small>Add: photos/event1.jpg</small></div></div>
-      <div class="gallery-item"><div class="gallery-placeholder"><span>🌆</span>Sampling Site<br><small>Add: photos/site1.jpg</small></div></div>
-      <div class="gallery-item"><div class="gallery-placeholder"><span>📊</span>Data Analysis Session<br><small>Add: photos/lab2.jpg</small></div></div>
+      <div class="gallery-item" onclick="openLightbox(this)">
+        <img src="./photos/lab1.jpg" alt="Lab instrument" data-caption="Lab instrument" loading="lazy"
+             onerror="showImageFallback(this,'🔬','Lab instrument')">
+        <div class="gallery-caption">Lab Instrument</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(this)">
+        <img src="./photos/field1.jpg" alt="Field sampling campaign" data-caption="Field sampling campaign" loading="lazy"
+             onerror="showImageFallback(this,'🌫️','Field Sampling')">
+        <div class="gallery-caption">Field Sampling Campaign</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(this)">
+        <img src="./photos/team1.jpg" alt="CAP Lab team" data-caption="CAP Lab team" loading="lazy"
+             onerror="showImageFallback(this,'👩‍🔬','Team Photo')">
+        <div class="gallery-caption">Team Photo</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(this)">
+        <img src="./photos/event1.jpg" alt="Conference or award" data-caption="Conference or award" loading="lazy"
+             onerror="showImageFallback(this,'🏆','Conference / Award')">
+        <div class="gallery-caption">Conference / Award</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(this)">
+        <img src="./photos/site1.jpg" alt="Sampling site" data-caption="Sampling site" loading="lazy"
+             onerror="showImageFallback(this,'🌆','Sampling Site')">
+        <div class="gallery-caption">Sampling Site</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(this)">
+        <img src="./photos/lab2.jpg" alt="Data analysis session" data-caption="Data analysis session" loading="lazy"
+             onerror="showImageFallback(this,'📊','Data Analysis')">
+        <div class="gallery-caption">Data Analysis Session</div>
+      </div>
     </div>
-  </div>
-</section>
+   </div>
+ </section>
 
 <!-- Lightbox -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
@@ -1298,6 +1411,18 @@
       }
     });
   });
+
+  // Image fallback: prevents missing GitHub image files from breaking the layout.
+  function showImageFallback(img, emoji, label) {
+    img.style.display = 'none';
+    const parent = img.parentElement;
+    if (!parent.querySelector('.photo-fallback')) {
+      const fallback = document.createElement('div');
+      fallback.className = 'photo-fallback';
+      fallback.textContent = (emoji ? emoji + ' ' : '') + label;
+      parent.appendChild(fallback);
+    }
+  }
 
   // Lightbox
   function openLightbox(el) {
