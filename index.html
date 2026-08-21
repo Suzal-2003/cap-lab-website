@@ -1160,7 +1160,7 @@
   align-items:center; justify-content:center; padding:1.5rem;
 " onclick="if(event.target===this) closePubModal()">
 
-  <div style="
+  <div data-modal-inner style="
     background:#fff; border-radius:16px;
     width:100%; max-width:820px; max-height:88vh;
     overflow-y:auto; position:relative;
@@ -1461,19 +1461,24 @@
 </footer>
 
 <script>
-  // Smooth scroll
+  // ── Nav toggle ──
+  document.querySelector('.nav-toggle')?.addEventListener('click', function() {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+
+  // ── Smooth scroll ──
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const target = document.querySelector(a.getAttribute('href'));
       if (target) {
         e.preventDefault();
         target.scrollIntoView({ behavior: 'smooth' });
-        document.getElementById('navLinks').classList.remove('open');
+        document.getElementById('navLinks')?.classList.remove('open');
       }
     });
   });
 
-  // Image fallback: prevents missing GitHub image files from breaking the layout.
+  // ── Image fallback ──
   function showImageFallback(img, emoji, label) {
     img.style.display = 'none';
     const parent = img.parentElement;
@@ -1485,7 +1490,30 @@
     }
   }
 
-  // Lightbox
+  // ── Publications modal ──
+  function openPubModal() {
+    const modal = document.getElementById('pubModal');
+    if (!modal) { console.error('pubModal not found'); return; }
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    // scroll inner content back to top
+    const inner = modal.querySelector('[data-modal-inner]');
+    if (inner) inner.scrollTop = 0;
+  }
+
+  function closePubModal() {
+    const modal = document.getElementById('pubModal');
+    if (!modal) return;
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  // click outside modal inner box to close
+  document.getElementById('pubModal')?.addEventListener('click', function(e) {
+    if (e.target === this) closePubModal();
+  });
+
+  // ── Lightbox ──
   function openLightbox(el) {
     const img = el.querySelector('img');
     if (!img) return;
@@ -1494,11 +1522,19 @@
     document.getElementById('lightbox').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
+
   function closeLightbox() {
     document.getElementById('lightbox').classList.remove('open');
     document.body.style.overflow = '';
   }
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+  // ── Escape key closes both ──
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      closeLightbox();
+      closePubModal();
+    }
+  });
 </script>
 </body>
 </html>
